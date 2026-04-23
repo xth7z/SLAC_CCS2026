@@ -1,0 +1,9 @@
+pyproject.toml
+setup.py
+metal-cpp/common/counter_thread.c
+metal-cpp/common/eviction.c
+src/metal_handler.mm
+src/mymodule.egg-info/PKG-INFO
+src/mymodule.egg-info/SOURCES.txt
+src/mymodule.egg-info/dependency_links.txt
+src/mymodule.egg-info/top_level.txt

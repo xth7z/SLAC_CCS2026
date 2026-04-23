@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: mymodule
+Version: 0.1
+Summary: Pybind11 + Metal module with Objective-C++
+Author: Your Name
+Requires-Python: >=3.8

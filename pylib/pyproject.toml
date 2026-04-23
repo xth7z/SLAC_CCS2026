@@ -1,0 +1,14 @@
+[build-system]
+requires = [
+    "setuptools>=64",
+    "wheel",
+    "pybind11>=2.10"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mymodule"
+version = "0.1"
+description = "Pybind11 + Metal module with Objective-C++"
+authors = [{name = "Your Name"}]
+requires-python = ">=3.8"
