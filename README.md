@@ -18,9 +18,6 @@ Using the provided scripts, evaluators can reproduce the key experimental result
 - **Figure 8** – Multi-run averaging (Method 1)
 - **Figure 9** – Cache-set aggregation / superset (Method 2)
 
-⚠️ **Note:**  
-This artifact focuses **only on side-channel construction and trace analysis (Section 4 and Section 5.1)**.  
-It does **NOT include end-to-end attacks** (e.g., GNN or LLM attacks).
 
 ---
 
