@@ -24,7 +24,7 @@ if __name__ == "__main__":
             t=attacker.probe(True)
 
     attacker.print(4096,True)
-    for i in range(4000):
+    for i in range(1000):
         attacker.Gprime()
         attacker.gpu_read(0,512*(i%2))
         t=attacker.probe(True)
