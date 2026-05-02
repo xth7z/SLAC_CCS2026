@@ -48,7 +48,7 @@ def build_undirected_neighbors(edge_index, num_nodes):
 def compute_trace_with_adjacent_overlap_correction(
     selected_nodes,
     node_sets,
-    device="mps",
+    device="cuda",
 ):
     selected_nodes_tensor = torch.tensor(
         selected_nodes,
@@ -87,7 +87,7 @@ def recover_one_node(
     node_sets,
     f_avg,
     threshold_T,
-    device="mps",
+    device="cuda",
 ):
     """
     Appendix-D-like single-node recovery.
@@ -270,7 +270,7 @@ def run_one_dataset(
     node_matrix_dir="nodes_matrix",
     trace_dir="index_select_traces",
     output_dir="recovery_results",
-    device="mps",
+    device="cuda",
 ):
     if dataset_name not in datasets:
         raise ValueError(f"No Table 2 f/T values for dataset: {dataset_name}")
@@ -382,7 +382,7 @@ def main():
             node_matrix_dir="nodes_matrix",
             trace_dir="index_select_traces_noise",
             output_dir="recovery_results",
-            device="mps",
+            device="cuda",
         )
 
         if result is not None:
