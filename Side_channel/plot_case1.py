@@ -32,15 +32,9 @@ for i in range(arr.shape[0]):
 
 result = np.mean(arr0, axis=0) - np.mean(arr1, axis=0)
 
-# 将 result 近似到最接近的整数
 result_int = np.rint(result).astype(int)
 
-# 如果 result 表示 cache-line count，一般不应该为负，可以裁剪到 0
-# result_int = np.clip(result_int, 0, None)
-
-# plt.plot(result_int, label="rounded result")
-plt.plot(result, label="rounded result")
-# plt.plot(np.mean(arr0, axis=0))
+plt.plot(result, label="result")
 
 
 real_trace = np.zeros(4096, dtype=int)
@@ -54,17 +48,14 @@ plt.plot(real_trace, label="real trace")
 plt.show()
 
 
-# 检查长度是否一致
 if len(result_int) != len(real_trace):
     raise ValueError(
         f"Length mismatch: result_int has length {len(result_int)}, "
         f"but real_trace has length {len(real_trace)}"
     )
 
-# undercount: result_int 比 real_trace 小的部分
 undercount = np.maximum(real_trace - result_int, 0)
 
-# overcount: result_int 比 real_trace 大的部分
 overcount = np.maximum(result_int - real_trace, 0)
 
 total_real = np.sum(real_trace)
@@ -81,7 +72,6 @@ print("Total overcount:", np.sum(overcount))
 print("Undercount rate:", undercount_rate)
 print("Overcount rate:", overcount_rate)
 
-# 也可以看有多少个 cache set 发生了 undercount / overcount
 num_undercount_sets = np.sum(result_int < real_trace)
 num_overcount_sets = np.sum(result_int > real_trace)
 num_equal_sets = np.sum(result_int == real_trace)

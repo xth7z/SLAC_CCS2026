@@ -1,6 +1,6 @@
 # SLAC Artifact
 
-This repository contains the open-source artifact for **SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon**. The artifact provides the low-level Apple Silicon SLC side-channel implementation and small reproduction scripts for the paper's main case studies: CPrime+CProbe / GPrime+CProbe validation, GNN edge recovery, and LLM keyword/output recovery.
+This repository contains the open-source artifact for SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon currently under submission to CCS 2026 Cycle B (#864). The artifact provides the low-level Apple Silicon SLC side-channel implementation and small reproduction scripts for the paper's main case studies: CPrime+CProbe / GPrime+CProbe validation, GNN edge recovery, and LLM keyword/output recovery.
 
 ## Project Structure
 
@@ -176,6 +176,4 @@ This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_t
 ## Notes
 
 - The included traces are pre-collected examples for artifact evaluation.
-- The results may not exactly match the paper because the paper reports averages over multiple repeated experiments, while this artifact provides representative traces and scripts.
-- Some scripts assume Apple MPS support, while `output_recovery.py` uses CUDA if available and otherwise falls back to CPU.
 - The artifact is for research and reproducibility purposes only.

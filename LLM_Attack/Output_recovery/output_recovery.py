@@ -217,7 +217,6 @@ def main():
     start_time = time.time()
 
     for idx, row in df.iterrows():
-        # if idx % 10 == 0:
         print(f"Processing {idx}/{len(df)}")
 
         true_token_ids = [int(x) for x in str(row["token_ids"]).split()]

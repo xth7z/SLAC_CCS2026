@@ -53,8 +53,6 @@ IOReturn MyUserClient::externalMethod(uint32_t selector, IOExternalMethodArgumen
     switch (selector) {
         case 0:
             return sGetPhysicalAddress(this, reference, arguments);
-        // case 1:
-        //     return sGetPMCCNTR(this, reference, arguments);
         default:
             return kIOReturnUnsupported;
     }
@@ -76,19 +74,3 @@ IOReturn MyUserClient::sGetPhysicalAddress(OSObject *target, void *reference, IO
     
     return result;
 }
-
-// IOReturn MyUserClient::sGetPMCCNTR(OSObject *target, void *reference, IOExternalMethodArguments *arguments)
-// {
-//     MyUserClient *me = OSDynamicCast(MyUserClient, target);
-//     if (!me || !arguments)
-//         return kIOReturnBadArgument;
-    
-//     uint64_t pmccntr_value = 0;
-    
-//     IOReturn result = MyKext::getPMCCNTR(&pmccntr_value);
-    
-//     arguments->scalarOutput[0] = pmccntr_value;
-//     arguments->scalarOutputCount = 1;
-    
-//     return result;
-// }
