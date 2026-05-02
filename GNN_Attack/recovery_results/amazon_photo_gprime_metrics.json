@@ -1,0 +1,22 @@
+{
+  "dataset": "amazon_photo",
+  "method": "gprime",
+  "f_avg": 25.29,
+  "threshold_T": 58,
+  "single_node": {
+    "tp": 237331,
+    "fp": 335815,
+    "fn": 831,
+    "precision": 0.4140847183789122,
+    "recall": 0.9965107783777429
+  },
+  "full_graph": {
+    "tp": 118251,
+    "fp": 812,
+    "fn": 830,
+    "precision": 0.9931800811335175,
+    "recall": 0.993029954400786,
+    "num_pred_edges": 119063,
+    "num_true_edges": 119081
+  }
+}

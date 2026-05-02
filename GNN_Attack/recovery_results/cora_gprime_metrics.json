@@ -1,0 +1,22 @@
+{
+  "dataset": "cora",
+  "method": "gprime",
+  "f_avg": 46.78,
+  "threshold_T": 95,
+  "single_node": {
+    "tp": 10472,
+    "fp": 1957,
+    "fn": 84,
+    "precision": 0.8425456593450801,
+    "recall": 0.9920424403183024
+  },
+  "full_graph": {
+    "tp": 5194,
+    "fp": 0,
+    "fn": 84,
+    "precision": 1.0,
+    "recall": 0.9840848806366048,
+    "num_pred_edges": 5194,
+    "num_true_edges": 5278
+  }
+}

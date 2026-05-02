@@ -1,0 +1,46 @@
+{
+  "cora": {
+    "dataset": "cora",
+    "method": "gprime",
+    "f_avg": 46.78,
+    "threshold_T": 95,
+    "single_node": {
+      "tp": 10472,
+      "fp": 1957,
+      "fn": 84,
+      "precision": 0.8425456593450801,
+      "recall": 0.9920424403183024
+    },
+    "full_graph": {
+      "tp": 5194,
+      "fp": 0,
+      "fn": 84,
+      "precision": 1.0,
+      "recall": 0.9840848806366048,
+      "num_pred_edges": 5194,
+      "num_true_edges": 5278
+    }
+  },
+  "amazon_photo": {
+    "dataset": "amazon_photo",
+    "method": "gprime",
+    "f_avg": 25.29,
+    "threshold_T": 58,
+    "single_node": {
+      "tp": 237331,
+      "fp": 335815,
+      "fn": 831,
+      "precision": 0.4140847183789122,
+      "recall": 0.9965107783777429
+    },
+    "full_graph": {
+      "tp": 118251,
+      "fp": 812,
+      "fn": 830,
+      "precision": 0.9931800811335175,
+      "recall": 0.993029954400786,
+      "num_pred_edges": 119063,
+      "num_true_edges": 119081
+    }
+  }
+}
