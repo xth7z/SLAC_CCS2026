@@ -1,6 +1,16 @@
 # SLAC Artifact
 
-This repository contains the open-source artifact for SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon currently under submission to CCS 2026 Cycle B (#864). The artifact provides the low-level Apple Silicon SLC side-channel implementation and small reproduction scripts for the paper's main case studies: CPrime+CProbe / GPrime+CProbe validation, GNN edge recovery, and LLM keyword/output recovery.
+This repository contains the open-source artifact for **SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon**, accepted at the ACM SIGSAC Conference on Computer and Communications Security (CCS) 2026. The artifact provides the low-level Apple Silicon SLC side-channel implementation and small reproduction scripts for the paper's main case studies: CPrime+CProbe / GPrime+CProbe validation, GNN edge recovery, and LLM keyword/output recovery.
+
+## Authors
+
+- Tianhong Xu (Northeastern University) — xu.tianh@northeastern.edu
+- Saion Kumar Roy (Northeastern University) — sai.roy@northeastern.edu
+- Ruyi Ding (Louisiana State University) — ruyiding@lsu.edu
+- A. Adam Ding (Northeastern University) — a.ding@northeastern.edu
+- Yunsi Fei (Northeastern University) — y.fei@northeastern.edu
+
+For questions about this artifact, please contact Tianhong Xu (xu.tianh@northeastern.edu).
 
 ## Project Structure
 
@@ -172,6 +182,19 @@ python3 output_recovery.py
 ```
 
 This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_token_mapping.csv` and `output_side_channel_traces.csv`, and writes recovered outputs to `output_recovery_results.csv`.
+
+## Citation
+
+If you use this artifact, please cite:
+
+```bibtex
+@inproceedings{xu2026slac,
+  title     = {{SLAC}: Access-Driven {CPU}-to-{GPU} Side-channel Attacks via System-Level Cache on Apple Silicon},
+  author    = {Xu, Tianhong and Roy, Saion Kumar and Ding, Ruyi and Ding, A. Adam and Fei, Yunsi},
+  booktitle = {Proceedings of the 2026 ACM SIGSAC Conference on Computer and Communications Security (CCS '26)},
+  year      = {2026}
+}
+```
 
 ## Notes
 
