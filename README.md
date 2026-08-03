@@ -183,19 +183,6 @@ python3 output_recovery.py
 
 This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_token_mapping.csv` and `output_side_channel_traces.csv`, and writes recovered outputs to `output_recovery_results.csv`.
 
-## Citation
-
-If you use this artifact, please cite:
-
-```bibtex
-@inproceedings{xu2026slac,
-  title     = {{SLAC}: Access-Driven {CPU}-to-{GPU} Side-channel Attacks via System-Level Cache on Apple Silicon},
-  author    = {Xu, Tianhong and Roy, Saion Kumar and Ding, Ruyi and Ding, A. Adam and Fei, Yunsi},
-  booktitle = {Proceedings of the 2026 ACM SIGSAC Conference on Computer and Communications Security (CCS '26)},
-  year      = {2026}
-}
-```
-
 ## Notes
 
 - The included traces are pre-collected examples for artifact evaluation.
