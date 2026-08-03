@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="SLAC is an access-driven CPU-to-GPU side channel through the system-level cache on Apple Silicon." />
+    <meta property="og:title" content="SLAC · CPU-to-GPU Side Channels on Apple Silicon" />
+    <meta property="og:description" content="Explore SLAC's cache primitives, measured traces, and GNN and LLM privacy attacks." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xth7z.github.io/SLAC_CCS2026/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+    <title>SLAC · Apple Silicon Side Channels</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#tab-content">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#overview" data-open-tab="overview" aria-label="SLAC overview">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>SLAC</strong><small>Apple Silicon side channels</small></span>
+      </a>
+      <nav class="project-tabs" role="tablist" aria-label="Project sections">
+        <button id="tab-overview" type="button" role="tab" aria-selected="true" aria-controls="overview" data-project-tab="overview">Overview</button>
+        <button id="tab-attack" type="button" role="tab" aria-selected="false" aria-controls="attack" data-project-tab="attack" tabindex="-1">Attack</button>
+        <button id="tab-results" type="button" role="tab" aria-selected="false" aria-controls="results" data-project-tab="results" tabindex="-1">Results</button>
+        <button id="tab-artifact" type="button" role="tab" aria-selected="false" aria-controls="artifact" data-project-tab="artifact" tabindex="-1">Artifact</button>
+        <button id="tab-paper" type="button" role="tab" aria-selected="false" aria-controls="paper" data-project-tab="paper" tabindex="-1">Paper</button>
+      </nav>
+      <a class="nav-repo" href="https://github.com/xth7z/SLAC_CCS2026">GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="tab-content" class="tab-content">
+      <section id="overview" class="project-panel" role="tabpanel" aria-labelledby="tab-overview" tabindex="0" data-project-panel>
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> ACM CCS 2026 · Accepted paper</p>
+            <h1 aria-label="Listen to the GPU from the CPU.">Listen to the<br /><em class="gpu-word">GPU</em> from the<br /><em>CPU.</em></h1>
+            <p class="hero-summary">SLAC reveals fine-grained GPU memory access through Apple Silicon’s shared system-level cache—without shared memory or victim cooperation.</p>
+            <p class="hero-authors">Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei</p>
+            <div class="hero-actions">
+              <button class="button primary" type="button" data-open-tab="attack">Explore the attack</button>
+              <a class="button secondary" href="https://github.com/xth7z/SLAC_CCS2026">Open artifact <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="cache-visual" aria-label="Animated illustration of CPU and GPU activity crossing the shared system-level cache">
+            <div class="visual-topline"><span>APPLE M1 / SHARED CACHE MAP</span><span class="live"><i></i> LIVE TRACE</span></div>
+            <div class="compute-row">
+              <div class="compute-node cpu-node"><span>ATTACKER</span><strong>CPU</strong><small>prime · probe</small></div>
+              <div class="signal-track"><i></i><i></i><i></i></div>
+              <div class="compute-node gpu-node"><span>VICTIM</span><strong>GPU</strong><small>private workload</small></div>
+            </div>
+            <div class="slc-label"><span>SYSTEM-LEVEL CACHE</span><span>12-bit index · 4,096 sets</span></div>
+            <div class="slc-grid" id="slc-grid" aria-hidden="true"></div>
+            <div class="visual-readout"><span>OBSERVED SET</span><strong id="observed-set">0x6B4</strong><span>EVICTIONS</span><strong id="eviction-count">12 / 16</strong></div>
+          </div>
+        </div>
+
+        <div class="metric-band" aria-label="Headline results">
+          <article><strong>62.5 <small>Kbps</small></strong><span>CPU-only covert channel</span></article>
+          <article><strong>400 <small>Kbps</small></strong><span>GPU-assisted covert channel</span></article>
+          <article><strong>&gt;90<small>%</small></strong><span>GNN edges recovered</span></article>
+          <article><strong>94.8<small>%</small></strong><span>Peak input recovery</span></article>
+        </div>
+
+        <div class="panel-shell overview-story">
+          <header class="tab-lead">
+            <p class="section-index">THE COMPLETE ATTACK</p>
+            <div><h2>From cache activity to private ML data.</h2><p>The same CPU-to-GPU observation primitive supports two end-to-end attacks. First profile the target items, then collect a cache-set trace around victim inference, and finally infer which private items the victim accessed.</p></div>
+          </header>
+          <figure class="paper-figure paper-figure-wide">
+            <img src="assets/figures/attack-workflow.png" alt="SLAC workflow showing CPU-to-GPU cache tracing applied to GNN edge recovery and LLM input and output recovery." />
+            <figcaption><strong>End-to-end attack workflow.</strong> The paper’s complete path from profiling and trace collection to GNN edge recovery and LLM input/output recovery.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="attack" class="project-panel" role="tabpanel" aria-labelledby="tab-attack" tabindex="0" data-project-panel hidden>
+        <div class="panel-shell">
+          <header class="tab-lead">
+            <p class="section-index">THE ATTACK</p>
+            <div><h2>Prime the shared cache. Let the GPU leave a footprint. Probe from the CPU.</h2><p>SLAC first recovers Apple M1’s hidden SLC indexing, then constructs two Prime+Probe variants with different attacker capabilities.</p></div>
+          </header>
+
+          <div class="figure-explainer">
+            <figure class="paper-figure">
+              <img src="assets/figures/cache-structure.png" alt="Apple M1 cache hierarchy showing Firestorm and Icestorm CPU clusters, the integrated GPU, the 8 MB system-level cache, and unified memory." />
+              <figcaption><strong>Apple M1 cache structure.</strong> CPU clusters and the integrated GPU meet at the 8 MB system-level cache.</figcaption>
+            </figure>
+            <aside class="explanation-card">
+              <span class="card-index">01</span>
+              <h3>Find the shared observation point.</h3>
+              <p>The GPU has a non-inclusive, non-exclusive relationship with the SLC, so GPU data accesses can change shared-cache state. The CPU’s exclusive relationship with the SLC dictates how the attacker must prime and probe it.</p>
+              <dl><div><dt>Cache line</dt><dd>128 bytes</dd></div><div><dt>SLC</dt><dd>8 MB · 16-way</dd></div><div><dt>Sets</dt><dd>4,096</dd></div></dl>
+            </aside>
+          </div>
+
+          <div class="subsection-heading">
+            <p class="section-index">CHOOSE THE PRIMITIVE</p>
+            <div><h2>Same CPU probe, different priming domain.</h2><p>CPrime needs only CPU execution. GPrime uses GPU parallelism to fill the SLC faster and more uniformly.</p></div>
+          </div>
+          <div class="primitive-explorer">
+            <div class="primitive-controls" role="group" aria-label="Select side-channel primitive">
+              <button type="button" data-mode="cprime" aria-pressed="true"><span>CPU only</span><strong>CPrime + CProbe</strong></button>
+              <button type="button" data-mode="gprime" aria-pressed="false"><span>GPU assisted</span><strong>GPrime + CProbe</strong></button>
+            </div>
+            <div class="primitive-stage" id="primitive-stage" data-mode="cprime">
+              <div class="stage-diagram" aria-label="Animated attack sequence">
+                <div class="stage-lane lane-cpu"><span class="lane-label">CPU</span><i class="lane-line"></i></div>
+                <div class="stage-lane lane-slc"><span class="lane-label">SLC</span><i class="lane-line"></i></div>
+                <div class="stage-lane lane-gpu"><span class="lane-label">GPU</span><i class="lane-line"></i></div>
+                <div class="stage-event event-prime"><b>1</b><span id="prime-label">Fill CPU L2, spill into SLC</span></div>
+                <div class="stage-event event-victim"><b>2</b><span>Victim GPU access evicts selected lines</span></div>
+                <div class="stage-event event-probe"><b>3</b><span>CPU times reloads and reads the footprint</span></div>
+                <div class="stage-packet packet-one"></div><div class="stage-packet packet-two"></div>
+              </div>
+              <div class="stage-readout">
+                <div><span>THROUGHPUT</span><strong id="mode-throughput">62.5 Kbps</strong></div>
+                <div><span>BIT ENCODING</span><strong id="mode-encoding">4 cache sets / bit</strong></div>
+                <div><span>ATTACKER NEEDS</span><strong id="mode-requirement">CPU execution only</strong></div>
+                <p id="mode-description">CPrime uses CPU L2 capacity evictions to populate the SLC. It is broader in scope, but its two-stage priming introduces more noise.</p>
+                <button class="replay-button" id="replay-primitive" type="button">Replay sequence <span aria-hidden="true">↻</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-figure-grid attack-figure-grid">
+            <figure class="paper-figure">
+              <img src="assets/figures/cprime-setup.png" alt="Two-step CPrime procedure that first loads SLC eviction sets and then loads L2 eviction sets to spill lines into the SLC." />
+              <figcaption><strong>CPrime procedure.</strong> Load SLC_ES, then load L2_ES so CPU L2 evictions populate the target SLC sets.</figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <img src="assets/figures/xor-index-map.png" alt="Heatmap of 12 recovered SLC index-bit functions over physical address bits 7 through 32." />
+              <figcaption><strong>Recovered SLC indexing.</strong> One functionally equivalent set of 12 XOR-based index functions over physical address bits 7–32.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="project-panel" role="tabpanel" aria-labelledby="tab-results" tabindex="0" data-project-panel hidden>
+        <div class="panel-shell">
+          <header class="tab-lead">
+            <p class="section-index">THE RESULTS</p>
+            <div><h2>Separate the victim’s footprint from system noise.</h2><p>SLAC subtracts a matched idle-kernel baseline, then either averages repeated cache-set traces or aggregates sets into supersets for a single-trial decision.</p></div>
+          </header>
+
+          <figure class="paper-figure paper-figure-wide">
+            <img src="assets/figures/differential-tracing.png" alt="Differential tracing procedure comparing baseline and target trace collection before subtracting the baseline trace." />
+            <figcaption><strong>Differential tracing.</strong> A matched idle-kernel baseline is subtracted from the target trace to suppress repeatable platform activity.</figcaption>
+          </figure>
+
+          <div class="paper-figure-grid trace-figure-grid">
+            <figure class="paper-figure">
+              <img src="assets/figures/averaged-trace.png" alt="Averaged side-channel trace across 4096 cache sets with thresholds separating zero, one, and two evicted cache lines." />
+              <figcaption><strong>Repeated-trace averaging.</strong> Midpoint thresholds at 0.5 and 1.5 separate zero, one, and two occupied lines per set.</figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <img src="assets/figures/superset-trace.png" alt="Single-trial aggregated side-channel trace over 64 supersets with a threshold of 32." />
+              <figcaption><strong>Cache-set aggregation.</strong> Groups of 64 sets form one superset; values above 32 mark victim-used regions.</figcaption>
+            </figure>
+          </div>
+
+          <div class="subsection-heading">
+            <p class="section-index">INTERACTIVE TRACE</p>
+            <div><h2>Move the paper’s decision threshold.</h2><p>This compact trace is derived from the first included GPrime sample pair. Each bar aggregates 64 SLC sets into one superset.</p></div>
+          </div>
+          <div class="trace-lab">
+            <div class="trace-chart-wrap">
+              <div class="chart-topline"><span>OBSERVED ACCESS VALUE</span><span>64 SUPERSETS</span></div>
+              <canvas id="trace-chart" role="img" aria-label="Bar chart of observed cache activity across 64 SLC supersets"></canvas>
+              <div class="chart-legend"><span><i class="signal-key"></i>Observed</span><span><i class="truth-key"></i>Known active</span><span><i class="threshold-key"></i>Threshold</span></div>
+            </div>
+            <div class="trace-controls">
+              <label for="trace-threshold"><span>Decision threshold</span><strong id="threshold-value">32</strong></label>
+              <input id="trace-threshold" type="range" min="8" max="64" value="32" step="1" />
+              <div class="trace-stats" aria-live="polite">
+                <div><span>Precision</span><strong id="trace-precision">100%</strong></div>
+                <div><span>Recall</span><strong id="trace-recall">100%</strong></div>
+                <div><span>Active found</span><strong id="trace-found">8 / 8</strong></div>
+              </div>
+              <p>The included scripts reproduce both noise-mitigation examples from the paper.</p>
+              <a class="text-link" href="https://github.com/xth7z/SLAC_CCS2026/tree/main/Side_channel">Inspect side-channel scripts <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <div class="subsection-heading attacks-heading">
+            <p class="section-index">END-TO-END RECOVERY</p>
+            <div><h2>Cache footprints reveal graph structure and language data.</h2></div>
+          </div>
+          <div class="attack-tabs" role="tablist" aria-label="Select evaluated attack">
+            <button id="gnn-tab" type="button" role="tab" aria-selected="true" aria-controls="attack-panel" data-attack="gnn">GNN edge recovery</button>
+            <button id="llm-tab" type="button" role="tab" aria-selected="false" aria-controls="attack-panel" data-attack="llm">LLM input + output</button>
+          </div>
+          <div class="attack-panel" id="attack-panel" role="tabpanel" aria-labelledby="gnn-tab">
+            <div class="attack-copy">
+              <p class="attack-kicker" id="attack-kicker">GRAPH STRUCTURE LEAKAGE</p>
+              <h3 id="attack-title">Recover edges from data-dependent node access.</h3>
+              <p id="attack-description">SLAC profiles each node’s cache footprint, observes a target inference, and matches the trace back to candidate neighbors. Bidirectional confirmation then reconstructs the graph.</p>
+              <a class="text-link" id="attack-link" href="https://github.com/xth7z/SLAC_CCS2026/tree/main/GNN_Attack">Explore the GNN artifact <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="attack-results" id="attack-results">
+              <article><span>CORA / FULL GRAPH</span><strong>100%</strong><small>precision</small><div><i style="--value: 100%"></i></div></article>
+              <article><span>CORA / FULL GRAPH</span><strong>98.4%</strong><small>recall</small><div><i style="--value: 98.4%"></i></div></article>
+              <article><span>AMAZON PHOTO</span><strong>99.3%</strong><small>precision + recall</small><div><i style="--value: 99.3%"></i></div></article>
+              <p>Values shown here come from the GPrime recovery results included in the public artifact.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="artifact" class="project-panel" role="tabpanel" aria-labelledby="tab-artifact" tabindex="0" data-project-panel hidden>
+        <div class="panel-shell">
+          <header class="tab-lead">
+            <p class="section-index">THE ARTIFACT</p>
+            <div><h2>Follow the evidence from hardware to secret recovery.</h2><p>The repository separates Apple Silicon collection, trace validation, and compact recovery scripts. Included traces let reviewers reproduce the main analysis without recollecting hardware data.</p></div>
+          </header>
+          <div class="artifact-map">
+            <a href="https://github.com/xth7z/SLAC_CCS2026/tree/main/GetFrameNumber"><span>01</span><strong>Physical addresses</strong><small>macOS kernel extension</small></a><i aria-hidden="true">→</i>
+            <a href="https://github.com/xth7z/SLAC_CCS2026/tree/main/pylib"><span>02</span><strong>Prime + probe</strong><small>C++ and Metal library</small></a><i aria-hidden="true">→</i>
+            <a href="https://github.com/xth7z/SLAC_CCS2026/tree/main/Side_channel"><span>03</span><strong>Cache traces</strong><small>validation and denoising</small></a><i aria-hidden="true">→</i>
+            <a href="https://github.com/xth7z/SLAC_CCS2026/tree/main/GNN_Attack"><span>04A</span><strong>GNN recovery</strong><small>edges and metrics</small></a>
+            <a href="https://github.com/xth7z/SLAC_CCS2026/tree/main/LLM_Attack"><span>04B</span><strong>LLM recovery</strong><small>keywords and tokens</small></a>
+          </div>
+          <div class="artifact-notes">
+            <article><p class="section-index">PLATFORM</p><h3>Apple Silicon macOS</h3><p>Side-channel collection uses Apple Metal and a physical-address kernel extension. The public artifact includes a prebuilt arm64 wheel and source.</p></article>
+            <article><p class="section-index">REPRODUCTION</p><h3>Included sample traces</h3><p>GNN matrices, cache traces, LLM keyword traces, output traces, and recovery results are included for small reproduction runs.</p></article>
+            <article><p class="section-index">START HERE</p><h3>README-driven setup</h3><p>Build the kernel extension, compile the Python side-channel library, then run the focused validation or recovery scripts.</p></article>
+          </div>
+          <a class="button primary artifact-button" href="https://github.com/xth7z/SLAC_CCS2026">Open the public artifact <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section id="paper" class="project-panel" role="tabpanel" aria-labelledby="tab-paper" tabindex="0" data-project-panel hidden>
+        <div class="panel-shell paper-tab-shell">
+          <header class="tab-lead">
+            <p class="section-index">THE PAPER</p>
+            <div><h2>SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon</h2><p>ACM SIGSAC Conference on Computer and Communications Security, 2026</p></div>
+          </header>
+          <div class="paper-card">
+            <div>
+              <p class="paper-authors">Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei</p>
+              <p class="paper-affiliations">Northeastern University · Louisiana State University</p>
+              <div class="paper-contributions">
+                <article><span>01</span><h3>Reverse engineering</h3><p>Recover a functionally equivalent set of 12 Apple M1 SLC indexing functions.</p></article>
+                <article><span>02</span><h3>Side-channel primitives</h3><p>Build CPrime+CProbe and the GPU-assisted GPrime+CProbe variant.</p></article>
+                <article><span>03</span><h3>Privacy attacks</h3><p>Demonstrate GNN edge recovery and LLM input/output recovery.</p></article>
+              </div>
+            </div>
+            <aside>
+              <p class="section-index">CITATION</p>
+              <p>Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei. “SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon.” ACM CCS, 2026.</p>
+              <button class="button secondary" id="copy-citation" type="button">Copy citation</button>
+              <a class="button primary" href="https://github.com/xth7z/SLAC_CCS2026">Code and artifact <span aria-hidden="true">↗</span></a>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#overview" data-open-tab="overview"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>SLAC</span></a>
+      <p>Research artifact · ACM CCS 2026</p>
+      <a href="https://github.com/xth7z/SLAC_CCS2026">github.com/xth7z/SLAC_CCS2026 <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
+</html>

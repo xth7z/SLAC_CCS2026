@@ -1,5 +1,7 @@
 # SLAC Artifact
 
+[**Interactive project website**](https://xth7z.github.io/SLAC_CCS2026/) · [**Browse the artifact**](https://github.com/xth7z/SLAC_CCS2026)
+
 This repository contains the open-source artifact for **SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon**, accepted at the ACM SIGSAC Conference on Computer and Communications Security (CCS) 2026. The artifact provides the low-level Apple Silicon SLC side-channel implementation and small reproduction scripts for the paper's main case studies: CPrime+CProbe / GPrime+CProbe validation, GNN edge recovery, and LLM keyword/output recovery.
 
 ## Authors
