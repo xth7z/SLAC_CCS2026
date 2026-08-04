@@ -38,7 +38,10 @@
         <div class="hero">
           <div class="hero-copy">
             <p class="eyebrow"><span></span> ACM CCS 2026 · Accepted paper</p>
-            <h1 aria-label="Listen to the GPU from the CPU.">Listen to the<br /><em class="gpu-word">GPU</em> from the<br /><em>CPU.</em></h1>
+            <div class="hero-title-row">
+              <h1 aria-label="Listen to the GPU from the CPU.">Listen to the<br /><em class="gpu-word">GPU</em> from the<br /><em>CPU.</em></h1>
+              <img class="hero-title-mark" src="favicon.svg" alt="SLAC shared-cache mark" />
+            </div>
             <p class="hero-summary">SLAC reveals fine-grained GPU memory access through Apple Silicon’s shared system-level cache—without shared memory or victim cooperation.</p>
             <p class="hero-authors">Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei</p>
             <div class="hero-actions">
@@ -61,8 +64,8 @@
         </div>
 
         <div class="metric-band" aria-label="Headline results">
-          <article><strong>62.5 <small>Kbps</small></strong><span>CPU-only covert channel</span></article>
-          <article><strong>400 <small>Kbps</small></strong><span>GPU-assisted covert channel</span></article>
+          <article><strong>12</strong><span>Recovered SLC index functions</span></article>
+          <article><strong>4,096</strong><span>Mapped shared-cache sets</span></article>
           <article><strong>&gt;90<small>%</small></strong><span>GNN edges recovered</span></article>
           <article><strong>94.8<small>%</small></strong><span>Peak input recovery</span></article>
         </div>
@@ -119,8 +122,8 @@
                 <div class="stage-packet packet-one"></div><div class="stage-packet packet-two"></div>
               </div>
               <div class="stage-readout">
-                <div><span>THROUGHPUT</span><strong id="mode-throughput">62.5 Kbps</strong></div>
-                <div><span>BIT ENCODING</span><strong id="mode-encoding">4 cache sets / bit</strong></div>
+                <div><span>PRIMING SOURCE</span><strong id="mode-prime-source">CPU L2 spill</strong></div>
+                <div><span>PROBE SOURCE</span><strong id="mode-probe-source">CPU timing</strong></div>
                 <div><span>ATTACKER NEEDS</span><strong id="mode-requirement">CPU execution only</strong></div>
                 <p id="mode-description">CPrime uses CPU L2 capacity evictions to populate the SLC. It is broader in scope, but its two-stage priming introduces more noise.</p>
                 <button class="replay-button" id="replay-primitive" type="button">Replay sequence <span aria-hidden="true">↻</span></button>

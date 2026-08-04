@@ -26,18 +26,18 @@ window.setInterval(animateGrid, 1600);
 
 const modes = {
   cprime: {
-    throughput: "62.5 Kbps",
-    encoding: "4 cache sets / bit",
+    primeSource: "CPU L2 spill",
+    probeSource: "CPU timing",
     requirement: "CPU execution only",
     primeLabel: "Fill CPU L2, spill into SLC",
     description: "CPrime uses CPU L2 capacity evictions to populate the SLC. It is broader in scope, but its two-stage priming introduces more noise."
   },
   gprime: {
-    throughput: "400 Kbps",
-    encoding: "1 cache set / bit",
+    primeSource: "Direct GPU fill",
+    probeSource: "CPU timing",
     requirement: "CPU + GPU execution",
     primeLabel: "Prime SLC in parallel from GPU",
-    description: "GPrime maps GPU threads across the eviction set and fills the SLC directly. Parallel priming produces a cleaner baseline and 6.4× higher covert-channel throughput."
+    description: "GPrime maps GPU threads across the eviction set and fills the SLC directly. Parallel priming produces a cleaner baseline for CPU-side probing."
   }
 };
 
@@ -52,8 +52,8 @@ function setMode(mode) {
   const data = modes[mode];
   modeButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));
   primitiveStage.dataset.mode = mode;
-  document.querySelector("#mode-throughput").textContent = data.throughput;
-  document.querySelector("#mode-encoding").textContent = data.encoding;
+  document.querySelector("#mode-prime-source").textContent = data.primeSource;
+  document.querySelector("#mode-probe-source").textContent = data.probeSource;
   document.querySelector("#mode-requirement").textContent = data.requirement;
   document.querySelector("#prime-label").textContent = data.primeLabel;
   document.querySelector("#mode-description").textContent = data.description;

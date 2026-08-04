@@ -27,11 +27,8 @@ button { color: inherit; }
 
 .site-header { height: 74px; padding: 0 clamp(1.25rem, 4vw, 4.5rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, .94); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px); }
 .brand { display: flex; align-items: center; gap: .7rem; font: 600 1.05rem/1 var(--sans); letter-spacing: -.01em; }
-.brand-mark { width: 26px; height: 24px; display: flex; gap: 3px; align-items: flex-end; }
-.brand-mark i { display: block; width: 6px; border: 1px solid var(--lime); border-radius: 2px 2px 0 0; }
-.brand-mark i:nth-child(1) { height: 10px; }
-.brand-mark i:nth-child(2) { height: 23px; background: var(--lime); }
-.brand-mark i:nth-child(3) { height: 16px; }
+.brand-mark { width: 30px; height: 30px; flex: 0 0 30px; display: block; background: url("favicon.svg") center / contain no-repeat; }
+.brand-mark i { display: none; }
 .brand-copy { display: flex; flex-direction: column; gap: .25rem; }
 .brand-copy strong { line-height: 1; }
 .brand-copy small { color: var(--muted); font-size: .65rem; font-weight: 500; letter-spacing: .02em; white-space: nowrap; }
@@ -81,6 +78,9 @@ button { color: inherit; }
 .hero { min-height: 620px; padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 7vw, 8rem) 4.5rem; display: grid; grid-template-columns: minmax(0, .95fr) minmax(440px, 1.05fr); align-items: center; gap: clamp(3rem, 7vw, 7rem); overflow: hidden; position: relative; }
 .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 74% 36%, rgba(40, 122, 76, .07), transparent 25%), linear-gradient(rgba(32,36,42,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(32,36,42,.035) 1px, transparent 1px); background-size: auto, 42px 42px, 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 90%); }
 .hero-copy, .cache-visual { position: relative; z-index: 1; }
+.hero-title-row { display: flex; align-items: center; gap: clamp(1rem, 2vw, 1.8rem); }
+.hero-title-row h1 { flex: 1 1 auto; min-width: 0; }
+.hero-title-mark { display: block; width: clamp(74px, 7.5vw, 104px); height: auto; flex: 0 0 auto; }
 .eyebrow, .section-index, .attack-kicker { margin: 0 0 1.25rem; color: var(--lime); font: 600 .78rem/1.4 var(--sans); letter-spacing: .08em; }
 .eyebrow { display: flex; align-items: center; gap: .7rem; }
 .eyebrow > span { width: 25px; height: 1px; background: var(--cyan); }
@@ -288,6 +288,8 @@ footer > a:last-child:hover { color: var(--lime); }
   .nav-repo { font-size: 0; }
   .nav-repo::before { content: "GitHub ↗"; font-size: .68rem; }
   .hero { min-height: 0; padding-top: 5rem; }
+  .hero-title-row { align-items: flex-start; gap: .75rem; }
+  .hero-title-mark { width: 62px; margin-top: .25rem; }
   .hero h1 { font-size: clamp(2.65rem, 12vw, 3.25rem); }
   .cache-visual { min-height: 350px; padding: .8rem; }
   .compute-row { grid-template-columns: 82px 1fr 82px; }
