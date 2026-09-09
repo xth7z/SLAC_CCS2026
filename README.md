@@ -195,7 +195,7 @@ This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_t
 **Badge sought:** *Artifacts Available*.
 
 **Archival DOI:** This artifact is permanently archived on Zenodo at
-`https://doi.org/<TO-BE-FILLED-AFTER-ZENODO-RELEASE>`. (GitHub is provided for
+`https://doi.org/10.5281/zenodo.22681956`. (GitHub is provided for
 convenient browsing; the archival copy of record is the Zenodo DOI above.)
 
 **Accepted paper:** `paper/SLAC_CCS2026.pdf`.
