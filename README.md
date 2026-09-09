@@ -189,3 +189,23 @@ This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_t
 
 - The included traces are pre-collected examples for artifact evaluation.
 - The artifact is for research and reproducibility purposes only.
+
+## Artifact Evaluation (CCS 2026)
+
+**Badge sought:** *Artifacts Available*.
+
+**Archival DOI:** This artifact is permanently archived on Zenodo at
+`https://doi.org/<TO-BE-FILLED-AFTER-ZENODO-RELEASE>`. (GitHub is provided for
+convenient browsing; the archival copy of record is the Zenodo DOI above.)
+
+**Accepted paper:** `paper/SLAC_CCS2026.pdf`.
+
+**Hardware / software requirements.** The side-channel implementation targets
+Apple silicon (demonstrated on Apple M1) running macOS, and requires Apple Metal
+and a standard C++/Python build environment. Reviewers do **not** need to build
+or run the artifact for the *Available* badge; the requirements are listed for
+completeness and for readers who wish to reproduce the results (see **Setup** and
+**Running the Artifact** above).
+
+**Contact.** Tianhong Xu (xu.tianh@northeastern.edu) is reachable throughout the
+artifact-evaluation period. This artifact contains no analytics or tracking.
