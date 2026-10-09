@@ -18,6 +18,8 @@ For questions about this artifact, please contact Tianhong Xu (xu.tianh@northeas
 
 ```text
 SLAC/
+├── LICENSE
+├── CITATION.cff
 ├── GetFrameNumber/
 │   ├── Info.plist
 │   ├── Makefile
@@ -188,7 +190,32 @@ This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_t
 ## Notes
 
 - The included traces are pre-collected examples for artifact evaluation.
-- The artifact is for research and reproducibility purposes only.
+- The artifact was developed to support research and reproducibility. Reuse is
+  governed by the licenses described below.
+
+## License
+
+The original SLAC source code and accompanying documentation are released under
+the [MIT License](LICENSE), unless otherwise noted in individual files.
+Third-party components retain their own licenses, including Apple's `metal-cpp`
+under the [Apache License 2.0](pylib/metal-cpp/LICENSE.txt).
+The paper PDF and third-party datasets and models remain subject to their
+respective terms; the MIT license does not replace those terms.
+
+## Citation
+
+If you use SLAC in your research, please cite the paper and the software artifact.
+Machine-readable metadata for both is provided in [CITATION.cff](CITATION.cff).
+
+> Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei.
+> **SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on
+> Apple Silicon.** ACM SIGSAC Conference on Computer and Communications Security
+> (CCS), 2026.
+
+The software artifact is archived under the concept DOI
+[10.5281/zenodo.22681956](https://doi.org/10.5281/zenodo.22681956), which covers all
+archived versions. When citing a particular archived release, use that release's
+version-specific DOI.
 
 ## Artifact Evaluation (CCS 2026)
 

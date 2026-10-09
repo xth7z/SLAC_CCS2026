@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: >-
+  If you use SLAC in your research, please cite both the paper in
+  preferred-citation and the software artifact using the metadata below.
+type: software
+title: "SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon (Artifact)"
+authors:
+  - family-names: Xu
+    given-names: Tianhong
+    affiliation: Northeastern University
+  - family-names: Roy
+    given-names: Saion Kumar
+    affiliation: Northeastern University
+  - family-names: Ding
+    given-names: Ruyi
+    affiliation: Louisiana State University
+  - family-names: Ding
+    given-names: A. Adam
+    affiliation: Northeastern University
+  - family-names: Fei
+    given-names: Yunsi
+    affiliation: Northeastern University
+repository-code: "https://github.com/xth7z/SLAC_CCS2026"
+url: "https://xth7z.github.io/SLAC_CCS2026/"
+# Concept DOI covering all archived versions of the artifact.
+doi: 10.5281/zenodo.22681956
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon"
+  authors:
+    - family-names: Xu
+      given-names: Tianhong
+    - family-names: Roy
+      given-names: Saion Kumar
+    - family-names: Ding
+      given-names: Ruyi
+    - family-names: Ding
+      given-names: A. Adam
+    - family-names: Fei
+      given-names: Yunsi
+  collection-title: "ACM SIGSAC Conference on Computer and Communications Security (CCS)"
+  year: 2026
+  url: "https://github.com/xth7z/SLAC_CCS2026/blob/main/paper/SLAC_CCS2026.pdf"
