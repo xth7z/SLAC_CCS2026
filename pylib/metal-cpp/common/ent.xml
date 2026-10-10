@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2022 CISPA; from cispa/BranchDifferent.
      MIT license: ../../licenses/CISPA-MIT.txt.
      See ../../THIRD_PARTY_NOTICES.md. -->
@@ -6,4 +7,3 @@
 <plist version="1.0"> <dict> <key>platform-application</key> <true/> <key>com.apple.private.security.no-container</key> <true/> <key>com.apple.system-task-ports</key> <true/> <key>task_for_pid-allow</key> <true/> <key>get-task-allow</key> <true/>
 
 </dict> </plist>
-
