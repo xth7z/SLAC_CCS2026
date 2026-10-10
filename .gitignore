@@ -1,3 +1,11 @@
 .DS_Store
 *.aux
 *.log
+
+# Generated Python and Metal build products
+**/__pycache__/
+**/*.egg-info/
+pylib/build/
+pylib/src/*.air
+pylib/src/*.metallib
+pylib/.venv/

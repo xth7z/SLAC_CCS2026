@@ -7,9 +7,9 @@ This repository contains the open-source artifact for **SLAC: Access-Driven CPU-
 ## Authors
 
 - Tianhong Xu (Northeastern University) — xu.tianh@northeastern.edu
-- Saion Kumar Roy (Northeastern University) — sai.roy@northeastern.edu
+- Saion K. Roy (Northeastern University) — sai.roy@northeastern.edu
 - Ruyi Ding (Louisiana State University) — ruyiding@lsu.edu
-- A. Adam Ding (Northeastern University) — a.ding@northeastern.edu
+- Aidong Adam Ding (Northeastern University) — a.ding@northeastern.edu
 - Yunsi Fei (Northeastern University) — y.fei@northeastern.edu
 
 For questions about this artifact, please contact Tianhong Xu (xu.tianh@northeastern.edu).
@@ -20,6 +20,7 @@ For questions about this artifact, please contact Tianhong Xu (xu.tianh@northeas
 SLAC/
 ├── LICENSE
 ├── CITATION.cff
+├── DATA_SOURCES.md
 ├── GetFrameNumber/
 │   ├── Info.plist
 │   ├── Makefile
@@ -32,19 +33,21 @@ SLAC/
 │   ├── com.sh
 │   ├── pyproject.toml
 │   ├── setup.py
+│   ├── MANIFEST.in
+│   ├── README.md
+│   ├── LICENSE
+│   ├── THIRD_PARTY_NOTICES.md
+│   ├── licenses/
 │   ├── plot2.py
 │   ├── dist/
-│   │   ├── mymodule-0.1-cp313-cp313-macosx_14_0_arm64.whl
-│   │   └── mymodule-0.1.tar.gz
+│   │   ├── mymodule-0.2.0-*.whl
+│   │   └── mymodule-0.2.0.tar.gz
 │   ├── src/
 │   │   ├── add.metal
 │   │   ├── metal_handler.mm
-│   │   ├── default.metallib
-│   │   ├── MyLibrary.air
-│   │   └── mymodule.egg-info/
+│   │   └── slac_resources/
 │   └── metal-cpp/
 │       ├── LICENSE.txt
-│       ├── Readme.md
 │       ├── common/
 │       │   ├── cache.h
 │       │   ├── config.h
@@ -112,7 +115,7 @@ SLAC/
 
 ## Requirements
 
-This artifact is intended for Apple Silicon macOS machines. The side-channel code requires Apple Metal support and a working C++/Python build environment.
+This artifact is intended for Apple Silicon macOS machines. Building the side-channel library requires Python 3.9 or later and Xcode with its command-line and Metal compiler tools; the default minimum deployment target is macOS 14.0. The build discovers the selected SDK with `xcrun`.
 
 Python packages used by the reproduction scripts include:
 
@@ -141,10 +144,18 @@ If macOS reports a signing or permission error, make sure the kext is correctly 
 
 ```bash
 cd ../pylib
-./com.sh
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
+sh ./com.sh
 ```
 
-This compiles the Metal/C++ code and installs the Python package used by the side-channel scripts.
+This builds the current Metal/C++ sources and installs the package for the active
+Python interpreter. The installed package includes its Metal library and license
+notices. See [the library README](pylib/README.md) for source archives, wheels,
+and build requirements. Install the reproduction dependencies listed above in
+the same virtual environment. Run the following examples from the repository
+root (use `cd ..` after installation).
 
 ## Running the Artifact
 
@@ -195,22 +206,26 @@ This loads TinyLlama through Hugging Face Transformers, uses `top3000_superset_t
 
 ## License
 
-The original SLAC source code and accompanying documentation are released under
-the [MIT License](LICENSE), unless otherwise noted in individual files.
-Third-party components retain their own licenses, including Apple's `metal-cpp`
-under the [Apache License 2.0](pylib/metal-cpp/LICENSE.txt).
-The paper PDF and third-party datasets and models remain subject to their
-respective terms; the MIT license does not replace those terms.
+The original SLAC software and accompanying software documentation are released
+under the [MIT License](LICENSE), unless otherwise noted. Third-party software
+retains its own MIT, Apache-2.0, or BSD-3-Clause terms; see the component scopes,
+upstream sources, and full texts in [Third-party notices](pylib/THIRD_PARTY_NOTICES.md).
+
+The MIT grant does not cover the authors' measurement traces, matrices, recovery
+results, or model-output records. No new data license is assigned to those files.
+MedQuAD material and other upstream datasets/models retain their respective
+terms. The paper PDF carries CC BY 4.0. See [Data sources and scope](DATA_SOURCES.md)
+for attribution, transformations, and the provenance details still unconfirmed.
 
 ## Citation
 
 If you use SLAC in your research, please cite the paper and the software artifact.
 Machine-readable metadata for both is provided in [CITATION.cff](CITATION.cff).
 
-> Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei.
+> Tianhong Xu, Saion K. Roy, Ruyi Ding, Aidong Adam Ding, and Yunsi Fei.
 > **SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on
 > Apple Silicon.** ACM SIGSAC Conference on Computer and Communications Security
-> (CCS), 2026.
+> (CCS), 2026. [DOI: 10.1145/3830454.3846599](https://doi.org/10.1145/3830454.3846599).
 
 The software artifact is archived under the concept DOI
 [10.5281/zenodo.22681956](https://doi.org/10.5281/zenodo.22681956), which covers all

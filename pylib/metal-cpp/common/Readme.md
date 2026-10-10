@@ -29,3 +29,12 @@ Header file for timing.
 implemented by:
 * `TIMER == COUNTER_THREAD`: [`counter_thread.c`](counter_thread.c)
 * `TIMER == MSR`: [`msr.c`](msr.c)
+
+## Source and license
+
+This documentation and the cache/timing helpers originate from
+[cispa/BranchDifferent](https://github.com/cispa/BranchDifferent).
+Copyright (c) 2022 CISPA, under the MIT license. The eviction implementation
+also includes Apache-2.0 code from `cgvwzq/evsets`. See
+[third-party notices](../../THIRD_PARTY_NOTICES.md) for the source revisions,
+license texts, and SLAC modifications.

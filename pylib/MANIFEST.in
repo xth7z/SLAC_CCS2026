@@ -1,0 +1,8 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md com.sh
+recursive-include licenses *.txt
+recursive-include metal-cpp *.h *.hpp *.c *.py *.md *.txt *.xml
+include src/add.metal
+include src/metal_handler.mm
+recursive-include tests *.py
+recursive-include src/slac_resources *.py
+global-exclude *.pyc .DS_Store

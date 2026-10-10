@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2022 CISPA.
+ * Adapted from cispa/BranchDifferent; see ../../THIRD_PARTY_NOTICES.md.
+ * Original MIT license: ../../licenses/CISPA-MIT.txt.
+ * Portions of eviction.c derive from cgvwzq/evsets (Apache-2.0).
+ * SLAC modifications adjust configuration, includes, and C++ integration.
+ */
+
 #include "metal-cpp/common/config.h"
 
 

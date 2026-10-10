@@ -21,6 +21,8 @@
 class MetalHandler {
 public:
     MetalHandler() {
+        const std::string libraryPath = pybind11::module_::import("slac_resources")
+            .attr("library_path")().cast<std::string>();
         timer_start();
         device = MTLCreateSystemDefaultDevice();
         if (!device) {
@@ -29,8 +31,7 @@ public:
         }
         commandQueue = [device newCommandQueue];
         
-        NSString *cwd = [[NSFileManager defaultManager] currentDirectoryPath];
-        NSString *libPath = [cwd stringByAppendingPathComponent:@"pylib/src/default.metallib"];
+        NSString *libPath = [NSString stringWithUTF8String:libraryPath.c_str()];
         if (!libPath) {
             std::cerr << "Error: metallib not found." << std::endl;
             return;

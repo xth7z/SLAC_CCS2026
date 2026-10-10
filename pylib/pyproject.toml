@@ -1,14 +1,30 @@
 [build-system]
-requires = [
-    "setuptools>=64",
-    "wheel",
-    "pybind11>=2.10"
-]
+requires = ["setuptools>=77.0.3", "wheel", "pybind11==3.1.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mymodule"
-version = "0.1"
-description = "Pybind11 + Metal module with Objective-C++"
-authors = [{name = "Your Name"}]
-requires-python = ">=3.8"
+version = "0.2.0"
+description = "SLAC CPU-to-GPU cache side-channel research library for Apple Silicon"
+readme = "README.md"
+authors = [
+    {name = "Tianhong Xu", email = "xu.tianh@northeastern.edu"},
+    {name = "Saion K. Roy"},
+    {name = "Ruyi Ding"},
+    {name = "Aidong Adam Ding"},
+    {name = "Yunsi Fei"},
+]
+requires-python = ">=3.9"
+license = "MIT AND Apache-2.0 AND BSD-3-Clause"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "licenses/*.txt"]
+
+[project.urls]
+Repository = "https://github.com/xth7z/SLAC_CCS2026"
+Paper = "https://doi.org/10.1145/3830454.3846599"
+
+[tool.setuptools]
+packages = ["slac_resources"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+slac_resources = ["default.metallib"]

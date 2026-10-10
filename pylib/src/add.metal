@@ -1,8 +1,8 @@
 /*
-See LICENSE-original.txt for this sample’s licensing information.
-
-Abstract:
-A shader that adds two arrays of floats.
+Derived sample notice: Copyright (c) 2020 Apple Inc.
+The original sample license is preserved in ../licenses/Apple-sample-MIT.txt.
+See ../THIRD_PARTY_NOTICES.md for the matching public sample and provenance limits.
+SLAC modifications replace array addition with GPU priming, writing, and reads.
 */
 
 #include <metal_stdlib>

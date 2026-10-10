@@ -210,7 +210,7 @@ function setAttack(name) {
 }
 attackButtons.forEach((button) => button.addEventListener("click", () => setAttack(button.dataset.attack)));
 
-const citation = "Tianhong Xu, Saion Kumar Roy, Ruyi Ding, A. Adam Ding, and Yunsi Fei. SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon. ACM CCS, 2026.";
+const citation = "Tianhong Xu, Saion K. Roy, Ruyi Ding, Aidong Adam Ding, and Yunsi Fei. SLAC: Access-Driven CPU-to-GPU Side-channel Attacks via System-Level Cache on Apple Silicon. ACM CCS, 2026. DOI: 10.1145/3830454.3846599.";
 const copyButton = document.querySelector("#copy-citation");
 copyButton.addEventListener("click", async () => {
   try {

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 CISPA.
+ * Adapted from cispa/BranchDifferent; see ../../THIRD_PARTY_NOTICES.md.
+ * Original MIT license: ../../licenses/CISPA-MIT.txt.
+ * SLAC modifications adjust configuration, includes, and C++ integration.
+ */
+
 #include "metal-cpp/common/config.h"
 
 #if TIMER == COUNTER_THREAD
