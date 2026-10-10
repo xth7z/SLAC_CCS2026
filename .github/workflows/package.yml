@@ -53,6 +53,7 @@ jobs:
           library = Path(library_path())
           assert library.is_file() and library.read_bytes().startswith(b"MTLB")
           dependencies = subprocess.check_output(["otool", "-L", mymodule.__file__], text=True)
+          assert subprocess.check_output(["lipo", "-archs", mymodule.__file__], text=True).strip() == "arm64"
           assert "/opt/homebrew" not in dependencies and "libomp" not in dependencies, dependencies
           print("Native import, installed Metal resource, and dynamic dependencies verified")
           PY

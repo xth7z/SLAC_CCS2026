@@ -13,6 +13,8 @@ reuse of the authors' research data.
 - Original dataset: [MedQuAD](https://github.com/abachaa/MedQuAD), by Asma Ben
   Abacha and Dina Demner-Fushman.
 - Upstream license: [Creative Commons Attribution 4.0 International](https://github.com/abachaa/MedQuAD/blob/master/LICENSE.txt).
+  A [copy of the upstream license text](licenses/MedQuAD-CC-BY-4.0.txt) is included
+  for the MedQuAD material; it does not assign that license to SLAC measurements.
 - Dataset paper: *A Question-Entailment Approach to Question Answering*, BMC
   Bioinformatics 20, 511 (2019), [DOI: 10.1186/s12859-019-3119-4](https://doi.org/10.1186/s12859-019-3119-4).
 - Acquisition source cited in the SLAC paper:

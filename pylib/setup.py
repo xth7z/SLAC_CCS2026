@@ -1,6 +1,7 @@
 """Build the native module and its Metal resource from the same source tree."""
 import os
 from pathlib import Path
+import platform
 import subprocess
 import sys
 
@@ -49,7 +50,7 @@ class build_py(_build_py):
 
 class build_ext(_build_ext):
     def build_extensions(self):
-        if sys.platform != "darwin":
+        if sys.platform != "darwin" or platform.machine() != "arm64":
             raise RuntimeError("SLAC requires Apple Silicon macOS and Xcode with Metal tools.")
         compiler = xcrun("--find", "clang++")
         sdk = xcrun("--show-sdk-path")
@@ -65,6 +66,9 @@ class build_ext(_build_ext):
 
 
 setup(
+    # Python.org interpreters may report universal2 although this extension is arm64.
+    options={"bdist_wheel": {"plat_name":
+             f"macosx-{os.environ['MACOSX_DEPLOYMENT_TARGET']}-arm64"}},
     ext_modules=[Extension(
         "mymodule",
         sources=["src/metal_handler.mm", "metal-cpp/common/counter_thread.c",

@@ -26,6 +26,7 @@ def check(dist, source):
     assert not any(name.endswith((".air", ".metallib", ".so")) for name in files), "Stale binary in sdist"
 
     for wheel in wheels:
+        assert wheel.name.endswith("_arm64.whl"), "SLAC requires an arm64 wheel tag"
         with zipfile.ZipFile(wheel) as archive:
             names = archive.namelist()
             metadata_name, = [name for name in names if name.endswith(".dist-info/METADATA")]
