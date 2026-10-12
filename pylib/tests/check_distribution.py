@@ -32,7 +32,7 @@ def check(dist, source):
             metadata_name, = [name for name in names if name.endswith(".dist-info/METADATA")]
             info = metadata_name.removesuffix("METADATA")
             metadata = BytesParser().parsebytes(archive.read(metadata_name))
-            assert metadata["Version"] == "0.2.0"
+            assert metadata["Version"] == "0.2.1"
             assert metadata["License-Expression"] == "MIT AND Apache-2.0 AND BSD-3-Clause"
             assert "Tianhong Xu" in metadata["Author-email"]
             assert "Your Name" not in str(metadata)

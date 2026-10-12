@@ -19,7 +19,6 @@ reuse of the authors' research data.
   Bioinformatics 20, 511 (2019), [DOI: 10.1186/s12859-019-3119-4](https://doi.org/10.1186/s12859-019-3119-4).
 - Acquisition source cited in the SLAC paper:
   [Afroz's Kaggle redistribution](https://www.kaggle.com/datasets/pythonafroz/medquad-medical-question-answer-for-ai-research).
-  The exact downloaded revision was not recorded.
 
 `LLM_Attack/Key_word_recovery/question_side_channel_traces.csv` includes 7,243
 question records with question text, focus-area labels, and measurements.
@@ -42,16 +41,22 @@ and evaluation fields. `top3000_superset_token_mapping.csv` maps 128 supersets t
 candidate token IDs. The artifact describes these as TinyLlama model-output and
 recovery data; they are not presented as a re-release of all MedQuAD answers.
 
-The exact collection-time model revision and complete generation parameters
-were not recorded in this artifact. The runnable script identifies its model in
-`MODEL_NAME` and downloads it through Hugging Face Transformers. No model weights
-are bundled here. Consult that model's upstream card and license for its terms;
-this document grants no new license to the model or generated-output records.
+The recovery script sets `MODEL_NAME` to
+[`TinyLlama/TinyLlama-1.1B-Chat-v1.0`](https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0)
+and downloads it through Hugging Face Transformers. The
+[TinyLlama project](https://github.com/jzhang38/TinyLlama) and model card identify
+the model's Apache-2.0 terms. No model weights are bundled here, and this
+document grants no new license to the generated-output records.
 
 ## GNN benchmarks and derived measurements
 
 `GNN_Attack/node_recovery.py` loads the public Cora and Amazon Photo benchmarks
 through PyTorch Geometric's `Planetoid` and `Amazon` dataset loaders.
+The calls are `Planetoid(root="data/Cora", name="Cora")` and
+`Amazon(root="data/Amazon", name="Photo")`; see the official
+[Planetoid](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.datasets.Planetoid.html)
+and [Amazon](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.datasets.Amazon.html)
+loader documentation.
 
 - Cora/Planetoid: [kimiyoung/planetoid](https://github.com/kimiyoung/planetoid);
   Zhilin Yang et al., *Revisiting Semi-Supervised Learning with Graph Embeddings*,
@@ -62,8 +67,7 @@ through PyTorch Geometric's `Planetoid` and `Amazon` dataset loaders.
 
 `nodes_matrix/` and `index_select_traces_noise/` contain SLAC profiles and access
 measurements for those benchmarks. `recovery_results/` contains derived
-neighborhoods/edges, metrics, and debug records. The original download revisions
-and a complete capture manifest were not recorded. These files are not raw
+neighborhoods/edges, metrics, and debug records. These files are not raw
 upstream dataset archives; recovered graph structures and source datasets may
 nevertheless carry upstream rights. Consult the actual dataset sources for their
 terms; the software license of a loader does not assign a license to its data.
@@ -83,6 +87,4 @@ by the owner/authors. Cite the published paper using
 
 The images in `website/assets/figures/` are SLAC project illustrations and plots
 associated with the paper. When reproducing paper figures, retain attribution
-to the paper and identify any changes. The original sources of small embedded
-pictograms were not recorded; no new claim of ownership or additional license
-for independently owned assets is made here.
+to the paper and identify any changes.

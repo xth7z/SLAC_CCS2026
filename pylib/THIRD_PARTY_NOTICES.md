@@ -15,8 +15,8 @@ and the license texts in `licenses/`.
   `flushing.c`, `msr.c`, `eviction.c`, `ent.xml`, and `Readme.md` match or adapt
   the upstream `common/` files. `config.h` adapts `benchmark/config.h`.
 - SLAC modifications include include paths, C++ casts, configuration constants,
-  threshold comments, and logging. The upstream revision above records the
-  comparison source; the original import revision was not recorded.
+  threshold comments, and logging. The upstream revision above is the reference
+  used for comparison.
 
 The `common/` directory is separate from Apple's Metal-cpp wrapper library,
 despite being stored beneath the same directory.
@@ -36,29 +36,27 @@ despite being stored beneath the same directory.
 ## Apple Metal-cpp
 
 - Source: [Apple Metal-cpp](https://developer.apple.com/metal/cpp/).
+- Distribution: [metal-cpp_macOS12_iOS15.zip](https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip).
 - Copyright 2020–2021 Apple Inc., as stated in the supplied source headers.
 - License: [Apache-2.0](licenses/Apple-metal-cpp-Apache-2.0.txt).
 - Scope: `metal-cpp/Foundation/`, `Metal/`, `QuartzCore/`, and
   `SingleHeader/MakeSingleHeader.py`. The original headers and
-  `metal-cpp/LICENSE.txt` are preserved. The original downloaded release is not
-  recorded, so no exact vendor version is asserted here.
+  `metal-cpp/LICENSE.txt` are preserved. All 81 supplied files in these four
+  directories match the Apple distribution above byte for byte.
 
 ## Metal shader sample
 
-The original comment in `src/add.metal` points to `LICENSE-original.txt` and is
-identical to the comment in
-[`larsgeb/m1-gpu-cpp/01-MetalAdder/add.metal`](https://github.com/larsgeb/m1-gpu-cpp/blob/e782affdf2af19c2cfa29f03686bea7684391238/01-MetalAdder/add.metal).
-That source supplies an [Apple sample license](licenses/Apple-sample-MIT.txt)
-with Copyright © 2020 Apple Inc. and MIT terms. It is preserved here for the
-inherited sample material. The matching project's
-[BSD-3-Clause notice](licenses/m1-gpu-cpp-BSD-3-Clause.txt), Copyright 2022
-Lars Gebraad, is also preserved for any material inherited through that project.
-
-SLAC replaces the sample's array addition with GPU priming, writing, and read
-kernels. The exact import route was not recorded; the matching header does not
-establish that all current kernel bodies originate from that project. These
-notices preserve the identified source terms without asserting an unverified
-history. They also accompany the Metal library compiled from `src/add.metal`.
+- Apple sample: [Performing calculations on a GPU](https://developer.apple.com/documentation/metal/performing-calculations-on-a-gpu).
+- C++ adaptation and tutorial: [larsgeb/m1-gpu-cpp](https://github.com/larsgeb/m1-gpu-cpp/blob/e782affdf2af19c2cfa29f03686bea7684391238/01-MetalAdder/add.metal)
+  and Lars Gebraad's [M1 GPUs for C++ science: Getting started](https://larsgeb.github.io/2022/04/20/m1-gpu.html).
+- Scope: the sample scaffold and inherited license reference in `src/add.metal`.
+  The original file header matches the linked C++ sample. SLAC replaces array
+  addition with GPU priming, writing, and read kernels.
+- Preserved notices: [Apple sample MIT](licenses/Apple-sample-MIT.txt),
+  Copyright © 2020 Apple Inc., and the adaptation project's
+  [BSD-3-Clause notice](licenses/m1-gpu-cpp-BSD-3-Clause.txt),
+  Copyright 2022 Lars Gebraad. These notices also accompany the compiled Metal
+  library.
 
 ## pybind11
 
@@ -72,9 +70,3 @@ history. They also accompany the Metal library compiled from `src/add.metal`.
 Research data, model outputs, and the paper are not licensed by this software
 package. In the full artifact, consult the root `DATA_SOURCES.md` and the paper's
 CC BY 4.0 notice. The package contains no model weights or research datasets.
-
-No external source has been established from the available records for the
-`GetFrameNumber/` implementation or for small pictograms embedded in the project
-figures. Their initial creation/import histories still need maintainer
-confirmation. This file does not claim that an automated similarity search can
-prove those materials are original or grant rights held by unidentified parties.

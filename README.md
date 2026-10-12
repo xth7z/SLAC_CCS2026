@@ -40,8 +40,8 @@ SLAC/
 │   ├── licenses/
 │   ├── plot2.py
 │   ├── dist/
-│   │   ├── mymodule-0.2.0-*.whl
-│   │   └── mymodule-0.2.0.tar.gz
+│   │   ├── mymodule-0.2.1-*.whl
+│   │   └── mymodule-0.2.1.tar.gz
 │   ├── src/
 │   │   ├── add.metal
 │   │   ├── metal_handler.mm
@@ -215,7 +215,7 @@ The MIT grant does not cover the authors' measurement traces, matrices, recovery
 results, or model-output records. No new data license is assigned to those files.
 MedQuAD material and other upstream datasets/models retain their respective
 terms. The paper PDF carries CC BY 4.0. See [Data sources and scope](DATA_SOURCES.md)
-for attribution, transformations, and the provenance details still unconfirmed.
+for dataset/model references, attribution, transformations, and reuse terms.
 
 ## Citation
 

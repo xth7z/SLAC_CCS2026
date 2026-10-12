@@ -20,7 +20,7 @@ sh ./com.sh
 
 `com.sh` installs the current source for the active interpreter. It does not
 select a pre-existing wheel by filename or modify the system Python environment.
-You may also install a source archive with `python -m pip install mymodule-0.2.0.tar.gz`.
+You may also install a source archive with `python -m pip install mymodule-0.2.1.tar.gz`.
 Builds need access to the declared build dependencies unless they are already
 provided by your build environment.
 
@@ -49,7 +49,8 @@ SLAC-authored software uses [MIT](LICENSE). The combined package includes
 third-party MIT, Apache-2.0, and BSD-3-Clause material; consult
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Version 0.2.0 replaces the earlier 0.1 distributions, which omitted license files
+Version 0.2.1 adds verified upstream references and concise notices to the 0.2
+package series. The 0.2 series replaces the earlier 0.1 distributions, which omitted license files
 and required source headers and did not match the current source tree. The old
 archives are retained in Git history, but are no longer the distributions offered
 by the current tree. Artifact-level GitHub/Zenodo versions are separate from this
