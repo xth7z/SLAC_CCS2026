@@ -114,14 +114,14 @@ function drawTrace() {
   const y = (value) => padding.top + ((max - value) / (max - min)) * plotHeight;
   const zeroY = y(0);
 
-  context.strokeStyle = "#e2e6e4";
+  context.strokeStyle = "#ded4c3";
   context.lineWidth = 1;
   [-64, 0, 32, 64].forEach((value) => {
     context.beginPath();
     context.moveTo(padding.left, y(value) + .5);
     context.lineTo(width - padding.right, y(value) + .5);
     context.stroke();
-    context.fillStyle = "#66707a";
+    context.fillStyle = "#667085";
     context.font = "10px IBM Plex Sans, sans-serif";
     context.textAlign = "right";
     context.fillText(String(value), padding.left - 7, y(value) + 3);
@@ -133,7 +133,7 @@ function drawTrace() {
     const predicted = value >= threshold;
     const barTop = value >= 0 ? y(value) : zeroY;
     const barHeight = Math.max(1, Math.abs(y(value) - zeroY));
-    context.fillStyle = predicted ? "rgba(40, 122, 76, .95)" : "rgba(80, 145, 104, .48)";
+    context.fillStyle = predicted ? "rgba(49, 92, 168, .95)" : "rgba(49, 92, 168, .42)";
     context.fillRect(padding.left + index * step + 1, barTop, Math.max(2, step - 2), barHeight);
     if (actual) {
       context.fillStyle = "#e66f25";
@@ -141,7 +141,7 @@ function drawTrace() {
     }
   });
 
-  context.strokeStyle = "#171a1f";
+  context.strokeStyle = "#111827";
   context.setLineDash([5, 4]);
   context.beginPath();
   context.moveTo(padding.left, y(threshold));
@@ -205,7 +205,7 @@ function setAttack(name) {
   document.querySelector("#attack-description").textContent = data.description;
   const link = document.querySelector("#attack-link");
   link.href = data.link;
-  link.innerHTML = `${data.linkText} <span aria-hidden="true">↗</span>`;
+  link.innerHTML = `${data.linkText}`;
   document.querySelector("#attack-results").innerHTML = `${data.results.map(([label, value, caption, bar]) => `<article><span>${label}</span><strong>${value}</strong><small>${caption}</small><div><i style="--value: ${bar}"></i></div></article>`).join("")}<p>${data.note}</p>`;
 }
 attackButtons.forEach((button) => button.addEventListener("click", () => setAttack(button.dataset.attack)));
